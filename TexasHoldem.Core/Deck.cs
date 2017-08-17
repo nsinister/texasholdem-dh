@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TexasHoldem.Core.Helpers;
+using Darkhood.TexasHoldem.Core.Helpers;
 
-namespace TexasHoldem.Core
+namespace Darkhood.TexasHoldem.Core
 {
     public class Deck
     {
@@ -37,6 +37,7 @@ namespace TexasHoldem.Core
                 deck.Cards.Shuffle();
                 deck.IsShuffled = true;
             }
+            return deck;
         }
         
         public void Reset()

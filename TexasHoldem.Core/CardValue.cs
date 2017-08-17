@@ -1,4 +1,4 @@
-﻿namespace TexasHoldem.Core
+﻿namespace Darkhood.TexasHoldem.Core
 {
     public enum CardValue
     {

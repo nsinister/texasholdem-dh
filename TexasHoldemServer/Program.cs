@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TexasHoldemServer
+namespace Darkhood.TexasHoldem.Server
 {
     class Program
     {

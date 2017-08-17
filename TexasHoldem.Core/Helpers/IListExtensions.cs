@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TexasHoldem.Core.Helpers
+namespace Darkhood.TexasHoldem.Core.Helpers
 {
     public static class IListExtensions
     {

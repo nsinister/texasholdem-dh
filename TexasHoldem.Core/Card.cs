@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TexasHoldem.Core
+namespace Darkhood.TexasHoldem.Core
 {
     public class Card : IComparable<Card>, IEquatable<Card>
     {
