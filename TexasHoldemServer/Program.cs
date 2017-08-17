@@ -6,7 +6,7 @@ namespace TexasHoldemServer
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            
         }
     }
 }
