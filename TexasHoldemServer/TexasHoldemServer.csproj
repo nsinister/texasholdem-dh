@@ -6,4 +6,8 @@
     <RootNamespace>Darkhood.TexasHoldem.Server</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TexasHoldem.Core\TexasHoldem.Core.csproj" />
+  </ItemGroup>
+
 </Project>

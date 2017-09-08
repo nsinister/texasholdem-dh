@@ -60,7 +60,15 @@ namespace Darkhood.TexasHoldem.Core
 
         public int CompareTo(Card other)
         {
-            throw new NotImplementedException();
+            if (this.Value != other.Value)
+            {
+                return this.Value - other.Value;
+            }
+            if (this.Suit != other.Suit)
+            {
+                return this.Suit - other.Suit;
+            }
+            return 0;
         }
     }
 }
