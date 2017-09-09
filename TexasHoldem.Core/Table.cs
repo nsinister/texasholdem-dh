@@ -7,7 +7,7 @@ namespace Darkhood.TexasHoldem.Core
     public class Table
     {
         public decimal Stake { get; set; }
-        public List<Pot> Pots;
+        public List<Pot> Pots { get; set; }
         private Tournament game;
 	
 	    private Pot GetNextPotAfter(Pot pot)

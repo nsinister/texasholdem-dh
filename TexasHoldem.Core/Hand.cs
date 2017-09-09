@@ -18,6 +18,7 @@ namespace Darkhood.TexasHoldem.Core
         }
 
         public Hand(IEnumerable<Card> cards)
+            : this()
         {
             Cards = new List<Card>(cards);
             CreateCardHistogram(cards);

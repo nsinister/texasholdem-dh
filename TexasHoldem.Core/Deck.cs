@@ -9,7 +9,7 @@ namespace Darkhood.TexasHoldem.Core
     public class Deck
     {
         public const int CardsInDeck = 52;
-        protected IList<Card> Cards;
+        public IList<Card> Cards;
         private int _index = 0;
         public bool IsShuffled { get; set; }
 
@@ -28,7 +28,7 @@ namespace Darkhood.TexasHoldem.Core
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    Card card = new Card((CardSuit)i, (CardValue)j);
+                    Card card = new Card((CardValue)i, (CardSuit)j);
                     deck.Cards.Add(card);
                 }
             }
@@ -37,6 +37,7 @@ namespace Darkhood.TexasHoldem.Core
                 deck.Cards.Shuffle();
                 deck.IsShuffled = true;
             }
+            deck.Reset();
             return deck;
         }
         
@@ -61,6 +62,7 @@ namespace Darkhood.TexasHoldem.Core
                 Cards.Shuffle();
             }
             while (_unshuffledDeck.Cards.SequenceEqual(Cards));
+            IsShuffled = true;
         }
     }
 }

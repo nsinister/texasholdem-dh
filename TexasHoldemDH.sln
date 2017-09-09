@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.3
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TexasHoldemServer", "TexasHoldemServer\TexasHoldemServer.csproj", "{04DAA01B-D197-4269-B5D9-DEFB7AA1E7ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TexasHoldemServer", "TexasHoldemServer\TexasHoldemServer.csproj", "{04DAA01B-D197-4269-B5D9-DEFB7AA1E7ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TexasHoldem.Core", "TexasHoldem.Core\TexasHoldem.Core.csproj", "{352CE6B6-3605-4435-A926-A22EB096C056}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TexasHoldem.Core", "TexasHoldem.Core\TexasHoldem.Core.csproj", "{352CE6B6-3605-4435-A926-A22EB096C056}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TexasHoldem.Core.Tests", "TexasHoldem.Core.Tests\TexasHoldem.Core.Tests.csproj", "{7E9C2EC0-AEC3-4498-A3AF-65D58AADBA5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TexasHoldemTestClient", "TexasHoldemTestClient\TexasHoldemTestClient.csproj", "{CFF9A0B4-1AE1-4491-9AAD-C74404135190}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TexasHoldem.Net", "TexasHoldem.Net\TexasHoldem.Net.csproj", "{DC7398A6-3BD3-4950-9652-23BC00AEDCF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{352CE6B6-3605-4435-A926-A22EB096C056}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{352CE6B6-3605-4435-A926-A22EB096C056}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{352CE6B6-3605-4435-A926-A22EB096C056}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E9C2EC0-AEC3-4498-A3AF-65D58AADBA5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E9C2EC0-AEC3-4498-A3AF-65D58AADBA5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E9C2EC0-AEC3-4498-A3AF-65D58AADBA5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E9C2EC0-AEC3-4498-A3AF-65D58AADBA5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFF9A0B4-1AE1-4491-9AAD-C74404135190}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFF9A0B4-1AE1-4491-9AAD-C74404135190}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFF9A0B4-1AE1-4491-9AAD-C74404135190}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFF9A0B4-1AE1-4491-9AAD-C74404135190}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC7398A6-3BD3-4950-9652-23BC00AEDCF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC7398A6-3BD3-4950-9652-23BC00AEDCF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC7398A6-3BD3-4950-9652-23BC00AEDCF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC7398A6-3BD3-4950-9652-23BC00AEDCF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

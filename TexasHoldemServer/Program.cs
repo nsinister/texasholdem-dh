@@ -6,7 +6,8 @@ namespace Darkhood.TexasHoldem.Server
     {
         static void Main(string[] args)
         {
-            
+            GameServer server = new GameServer();
+            server.Listen().Wait();
         }
     }
 }
