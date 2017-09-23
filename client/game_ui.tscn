@@ -1,643 +1,701 @@
-[gd_scene load_steps=55 format=1]
+[gd_scene load_steps=57 format=1]
 
-[ext_resource path="res://cards.png" type="Texture" id=1]
+[ext_resource path="res://game_ui.gd" type="Script" id=1]
+[ext_resource path="res://table.png" type="Texture" id=2]
+[ext_resource path="res://cards.png" type="Texture" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 0, 313, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=2]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=3]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 0, 626, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=4]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 0, 939, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=5]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 0, 1252, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=6]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 224, 0, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=7]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 224, 313, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=8]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 224, 626, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=9]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 224, 939, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=10]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 447, 0, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=11]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 447, 313, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=12]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 447, 626, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=13]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 447, 939, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=14]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 670, 0, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=15]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 670, 313, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=16]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 670, 626, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=17]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 670, 939, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=18]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 893, 0, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=19]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 893, 313, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=20]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 893, 626, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=21]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 893, 939, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=22]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 1116, 0, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=23]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 1116, 313, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=24]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 1116, 626, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=25]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 1116, 939, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=26]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 1339, 0, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=27]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 1339, 313, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=28]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 1339, 626, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=29]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 1339, 939, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=30]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 1562, 0, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=31]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 1562, 313, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=32]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 1562, 626, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=33]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 1562, 939, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=34]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 1785, 0, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=35]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 1785, 313, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=36]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 1785, 626, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=37]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 1785, 939, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=38]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 2008, 0, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=39]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 2008, 313, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=40]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 2008, 626, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=41]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 2008, 939, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=42]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 2231, 0, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=43]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 2231, 313, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=44]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 2231, 626, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=45]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 2231, 939, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=46]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 2454, 0, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=47]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 2454, 313, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=48]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 2454, 626, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=49]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 2454, 939, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=50]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 2677, 0, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=51]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 2677, 313, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=52]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 2677, 626, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=53]
 
-atlas = ExtResource( 1 )
+atlas = ExtResource( 3 )
 region = Rect2( 2677, 939, 223, 312 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [node name="game_ui" type="Node2D"]
 
-[node name="Ah" type="Sprite" parent="."]
+script/script = ExtResource( 1 )
 
-transform/pos = Vector2( 265.808, 266.766 )
-transform/scale = Vector2( 0.4, 0.4 )
+[node name="table" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 518.75, 218.352 )
+transform/scale = Vector2( 0.384588, 0.384588 )
+texture = ExtResource( 2 )
+
+[node name="Ah" type="Sprite" parent="table"]
+
+transform/pos = Vector2( -248.339, -12.9246 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 1 )
 
-[node name="Ac" type="Sprite" parent="."]
+[node name="Ac" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 524.1, 268.144 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( -94.2094, -12.0051 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 2 )
 
-[node name="As" type="Sprite" parent="."]
+[node name="As" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 3 )
 
-[node name="Ad" type="Sprite" parent="."]
+[node name="Ad" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 4 )
 
-[node name="card_cover" type="Sprite" parent="."]
+[node name="card_cover" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 5 )
 
-[node name="2c" type="Sprite" parent="."]
+[node name="2c" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 6 )
 
-[node name="2h" type="Sprite" parent="."]
+[node name="2h" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 7 )
 
-[node name="2s" type="Sprite" parent="."]
+[node name="2s" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 8 )
 
-[node name="2d" type="Sprite" parent="."]
+[node name="2d" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 9 )
 
-[node name="3c" type="Sprite" parent="."]
+[node name="3c" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 10 )
 
-[node name="3h" type="Sprite" parent="."]
+[node name="3h" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 11 )
 
-[node name="3s" type="Sprite" parent="."]
+[node name="3s" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 12 )
 
-[node name="3d" type="Sprite" parent="."]
+[node name="3d" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 13 )
 
-[node name="4c" type="Sprite" parent="."]
+[node name="4c" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 14 )
 
-[node name="4h" type="Sprite" parent="."]
+[node name="4h" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 15 )
 
-[node name="4s" type="Sprite" parent="."]
+[node name="4s" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 16 )
 
-[node name="4d" type="Sprite" parent="."]
+[node name="4d" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 17 )
 
-[node name="5c" type="Sprite" parent="."]
+[node name="5c" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 18 )
 
-[node name="5h" type="Sprite" parent="."]
+[node name="5h" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 19 )
 
-[node name="5s" type="Sprite" parent="."]
+[node name="5s" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 20 )
 
-[node name="5d" type="Sprite" parent="."]
+[node name="5d" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 21 )
 
-[node name="6c" type="Sprite" parent="."]
+[node name="6c" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 22 )
 
-[node name="6h" type="Sprite" parent="."]
+[node name="6h" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 23 )
 
-[node name="6s" type="Sprite" parent="."]
+[node name="6s" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 24 )
 
-[node name="6d" type="Sprite" parent="."]
+[node name="6d" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 25 )
 
-[node name="7c" type="Sprite" parent="."]
+[node name="7c" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 26 )
 
-[node name="7h" type="Sprite" parent="."]
+[node name="7h" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 27 )
 
-[node name="7s" type="Sprite" parent="."]
+[node name="7s" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 28 )
 
-[node name="7d" type="Sprite" parent="."]
+[node name="7d" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 29 )
 
-[node name="8c" type="Sprite" parent="."]
+[node name="8c" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 30 )
 
-[node name="8h" type="Sprite" parent="."]
+[node name="8h" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 31 )
 
-[node name="8s" type="Sprite" parent="."]
+[node name="8s" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 640.136, 277.527 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 32 )
 
-[node name="8d" type="Sprite" parent="."]
+[node name="8d" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 632.49, 271.793 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 33 )
 
-[node name="9c" type="Sprite" parent="."]
+[node name="9c" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 643.958, 283.261 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 34 )
 
-[node name="9h" type="Sprite" parent="."]
+[node name="9h" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 529.276, 380.741 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 35 )
 
-[node name="9s" type="Sprite" parent="."]
+[node name="9s" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 405.037, 378.83 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 36 )
 
-[node name="9d" type="Sprite" parent="."]
+[node name="9d" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( -351.867, 350.159 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 37 )
 
-[node name="10c" type="Sprite" parent="."]
+[node name="10c" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( -499.042, 350.159 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 38 )
 
-[node name="10h" type="Sprite" parent="."]
+[node name="10h" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( -376.715, -379.986 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 39 )
 
-[node name="10s" type="Sprite" parent="."]
+[node name="10s" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( -512.422, -366.606 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 40 )
 
-[node name="10d" type="Sprite" parent="."]
+[node name="10d" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 666.895, -339.847 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 41 )
 
-[node name="Jc" type="Sprite" parent="."]
+[node name="Jc" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 525.453, -347.492 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 42 )
 
-[node name="Jh" type="Sprite" parent="."]
+[node name="Jh" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 865.678, -28.2928 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 43 )
 
-[node name="Js" type="Sprite" parent="."]
+[node name="Js" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 741.438, -22.5588 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 44 )
 
-[node name="Jd" type="Sprite" parent="."]
+[node name="Jd" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( -697.825, 2.289 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 45 )
 
-[node name="Qc" type="Sprite" parent="."]
+[node name="Qc" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( -835.444, -3.44507 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 46 )
 
-[node name="Qh" type="Sprite" parent="."]
+[node name="Qh" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 131.356, -339.708 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 47 )
 
-[node name="Qs" type="Sprite" parent="."]
+[node name="Qs" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( -73.2925, -334.028 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 48 )
 
-[node name="Qd" type="Sprite" parent="."]
+[node name="Qd" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 95.2469, 305.55 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 49 )
 
-[node name="Kc" type="Sprite" parent="."]
+[node name="Kc" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( -54.2081, 307.107 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 50 )
 
-[node name="Kh" type="Sprite" parent="."]
+[node name="Kh" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 445.209, -10.5505 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 51 )
 
-[node name="Ks" type="Sprite" parent="."]
+[node name="Ks" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 250.283, -15.7256 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 52 )
 
-[node name="Kd" type="Sprite" parent="."]
+[node name="Kd" type="Sprite" parent="table"]
 
-transform/pos = Vector2( 850.126, 421.711 )
-transform/scale = Vector2( 0.4, 0.4 )
+transform/pos = Vector2( 76.0562, -14.0005 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = SubResource( 53 )
+
+[node name="chat_panel" type="Panel" parent="."]
+
+anchor/left = 2
+anchor/top = 2
+anchor/right = 2
+anchor/bottom = 2
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.046875
+margin/top = 6.65625
+margin/right = 8.14063
+margin/bottom = 9.14063
+
+[node name="le_chat_message" type="LineEdit" parent="chat_panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 10.0
+margin/top = 126.0
+margin/right = 506.0
+margin/bottom = 150.0
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="lb_chat_history" type="RichTextLabel" parent="chat_panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 7.0
+margin/top = 18.0
+margin/right = 509.0
+margin/bottom = 109.0
+bbcode/enabled = false
+bbcode/bbcode = ""
+visible_characters = -1
+percent_visible = 1.0
+
+[connection signal="text_entered" from="chat_panel/le_chat_message" to="." method="_on_le_chat_message_text_entered"]
 
 
