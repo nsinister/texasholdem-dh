@@ -9,6 +9,15 @@ namespace Darkhood.TexasHoldem.Core
         public GameSettings Settings { get; set; }
         public List<Player> Players { get; set; }
         private Dictionary<int, int> PlayerMap { get; set; }
+
+        public int CurrentTurnPlayerId
+        {
+            get
+            {
+                return this.currentTurnPlayerId;
+            }
+        }
+
         private GameState _gameState;
 
         public GameState GameState
@@ -183,7 +192,7 @@ namespace Darkhood.TexasHoldem.Core
 
         private void NextPlayerTurn()
         {
-            // TODO: Optimize this. Called or folded playes can be counted once per hand. 
+            // TODO: Optimize this. Called or folded players can be counted once per hand. 
             int calledPlayerCount = 0;
             int foldedPlayerCount = 0;
             Player lastNotFoldedPlayer = null;

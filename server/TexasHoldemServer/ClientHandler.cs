@@ -95,7 +95,7 @@ namespace Darkhood.TexasHoldem.Server
 
         private bool HandlePacket(byte packetHeader)
         {
-            Console.WriteLine(packetHeader + " from " + clientId);
+            //Console.WriteLine(packetHeader + " from " + clientId);
             switch(packetHeader)
             {
                 case PacketHeaders.CL_CONNECT:

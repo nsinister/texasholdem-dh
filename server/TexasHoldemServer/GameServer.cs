@@ -37,6 +37,13 @@ namespace Darkhood.TexasHoldem.Server
             Game = new Tournament();
         }
 
+        public GameServer(string ipAddress, int port)
+        {
+            _listenAddress = IPAddress.Parse(ipAddress);
+            _port = port;
+            Game = new Tournament();
+        }
+
         public async Task Listen()
         {
             TcpListener listener = new TcpListener(_listenAddress, _port);

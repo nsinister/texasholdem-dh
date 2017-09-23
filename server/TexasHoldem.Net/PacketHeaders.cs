@@ -42,5 +42,23 @@ namespace Darkhood.TexasHoldem.Net
 
         // Game info
         public const byte S_PLAYER_LIST = 0x80;
+
+        public const byte S_GAME_LIST_BEGIN = 0x81;
+        public const byte S_GAME_LIST_END = 0x82;
+
+        // Open lobby item, followed by name, session ID,
+        // number of players available and max players
+        public const byte S_GAME_LOBBY_ITEM = 0x83;
+
+        // When client sends CL_CREATE_LOBBY and the server successfully creates lobby,
+        // it will broadcast a signal to all clients to refresh their lobby list
+        public const byte S_LOBBY_CREATED = 0x84;
+
+        // Create lobby. Requires game name. Server responds with newly created session ID. 
+        // Client becomes its host.
+        public const byte CL_CREATE_LOBBY = 0x70;
+
+        // Join lobby with the specified session ID
+        public const byte CL_JOIN_LOBBY = 0x71;
     }
 }
