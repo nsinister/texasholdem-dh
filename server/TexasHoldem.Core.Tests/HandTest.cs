@@ -1,14 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using Darkhood.TexasHoldem.Core;
+﻿using Darkhood.TexasHoldem.Core;
 using System.Collections.Generic;
+using Xunit;
 
 namespace Darkhood.TexasHoldem.Core.Tests
 {
-    [TestClass]
     public class HandTest
     {
-        [TestMethod]
+        [Fact]
         public void TestGetAllPossibleHands()
         {
             List<Card> cards = new List<Card>();
@@ -21,7 +19,7 @@ namespace Darkhood.TexasHoldem.Core.Tests
             cards.Add(new Card(CardValue.Jack, CardSuit.Spades));
 
             List<Hand> allHands = Hand.GetAllPossibleHands(cards);
-            Assert.AreEqual(allHands.Count, (cards.Count - 1) * cards.Count);
+            Assert.Equal(allHands.Count, (cards.Count - 1) * cards.Count);
             // TODO: implement content check of allHands array
         }
     }
