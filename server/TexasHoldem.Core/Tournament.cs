@@ -311,7 +311,8 @@ namespace Darkhood.TexasHoldem.Core
                 }
 
             }
-            currentTurnPlayerId = nextTurnPlayer.PlayerId;
+            if (nextTurnPlayer != null)
+                currentTurnPlayerId = nextTurnPlayer.PlayerId;
         }
 
         private void ResetHandRound()
