@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TexasHoldem.Core", "TexasHo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TexasHoldem.Core.Tests", "TexasHoldem.Core.Tests\TexasHoldem.Core.Tests.csproj", "{7E9C2EC0-AEC3-4498-A3AF-65D58AADBA5E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TexasHoldem.WebAPI", "TexasHoldem.WebAPI\TexasHoldem.WebAPI.csproj", "{3D5F98B5-DF93-4C8F-A177-6A467A98054D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7E9C2EC0-AEC3-4498-A3AF-65D58AADBA5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E9C2EC0-AEC3-4498-A3AF-65D58AADBA5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E9C2EC0-AEC3-4498-A3AF-65D58AADBA5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D5F98B5-DF93-4C8F-A177-6A467A98054D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D5F98B5-DF93-4C8F-A177-6A467A98054D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D5F98B5-DF93-4C8F-A177-6A467A98054D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D5F98B5-DF93-4C8F-A177-6A467A98054D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
