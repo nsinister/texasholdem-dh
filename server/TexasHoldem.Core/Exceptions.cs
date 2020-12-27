@@ -14,4 +14,17 @@ namespace Darkhood.TexasHoldem.Core
         {
         }
     }
+
+    public class PlayerAlreadyEnteredException : Exception
+    {
+        public Player Player { get; set; }
+        public PlayerAlreadyEnteredException() : base()
+        {
+        }
+
+        public PlayerAlreadyEnteredException(Player player) : base()
+        {
+            this.Player = player;
+        }
+    }
 }

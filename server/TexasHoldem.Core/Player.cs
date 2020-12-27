@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Darkhood.TexasHoldem.Core
 {
-    public class Player
+    public class Player : IEquatable<Player>
     {
         public bool IsDealer { get; set; }
         public bool IsSmallBlind { get; set; }
@@ -44,6 +44,54 @@ namespace Darkhood.TexasHoldem.Core
             List<Card> cards = new List<Card>(tableCards);
             cards.AddRange(StartingHand);
             return Hand.GetBestPossibleHand(cards);
+        }
+
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(IsDealer);
+            hash.Add(IsSmallBlind);
+            hash.Add(IsBigBlind);
+            hash.Add(PlayerId);
+            hash.Add(PlayerName);
+            hash.Add(Chips);
+            hash.Add(StartingHand);
+            hash.Add(CurrentHand);
+            hash.Add(CallSum);
+            hash.Add(CalledSum);
+            hash.Add(Folded);
+            hash.Add(Checked);
+            return hash.ToHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (this == obj)
+            {
+                return true;
+            }
+            if (obj == null || obj.GetType() != typeof(Player))
+            {
+                return false;
+            }
+            Player other = (Player)obj;
+            return Equals(other);
+        }
+
+        public bool Equals(Player player)
+        {
+            return IsDealer == player.IsDealer &&
+                   IsSmallBlind == player.IsSmallBlind &&
+                   IsBigBlind == player.IsBigBlind &&
+                   PlayerId == player.PlayerId &&
+                   PlayerName == player.PlayerName &&
+                   Chips == player.Chips &&
+                   StartingHand.Equals(player.StartingHand) &&
+                   CurrentHand.Equals(player.CurrentHand) &&
+                   CallSum == player.CallSum &&
+                   CalledSum == player.CalledSum &&
+                   Folded == player.Folded &&
+                   Checked == player.Checked;
         }
     }
 }

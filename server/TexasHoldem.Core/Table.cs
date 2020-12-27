@@ -129,6 +129,7 @@ namespace Darkhood.TexasHoldem.Core
                     }
                     pot.AddChips(contributor, remainingChips);
                     contributor.Chips -= remainingChips;
+                    remainingChips = 0;
                 }
             }
 

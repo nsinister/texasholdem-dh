@@ -176,6 +176,7 @@ namespace Darkhood.TexasHoldem.Core
         {
             int currentPlayerIndex = PlayerMap[currentTurnPlayerId];
             Player nextTurnPlayer = null;
+
             do
             {
                 int nextTurnPlayerIndex = currentPlayerIndex + 1 >= Players.Count ? 0 : currentPlayerIndex + 1;
@@ -375,14 +376,17 @@ namespace Darkhood.TexasHoldem.Core
         {
             this.Players.Add(player);
             int index = Players.Count - 1;
+            if (PlayerMap.ContainsKey(player.PlayerId))
+            {
+                throw new PlayerAlreadyEnteredException(player);
+            }
             this.PlayerMap.Add(player.PlayerId, index);
             return true;
         }
 
         public void RemovePlayer(Player player)
         {
-            // TODO: implement safe removal from the tournament
-            //this.players.remove(player);
+            throw new NotImplementedException("TODO: implement safe removal from the tournament");
         }
 
         public void Fold(int playerId)
@@ -413,6 +417,12 @@ namespace Darkhood.TexasHoldem.Core
                 playerFold.Folded = true;
                 NextPlayerTurn();
             }
+        }
+
+        public void NextRound()
+        {
+            // TODO
+            this.GameState = GameState.PreFlop;
         }
 
         public void Bet(int playerId, int betSum)

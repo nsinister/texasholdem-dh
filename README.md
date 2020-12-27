@@ -1,8 +1,4 @@
 # texasholdem-dh
-Texas Holdem online poker
+Texas Holdem poker library
 
-Implemented:
-Core game logic of Texas Holdem poker
-
-Not implemented yet:
-Server and client itself
+This library contains only game logic of Texas Holdem poker. With this library you can write your own poker game.
