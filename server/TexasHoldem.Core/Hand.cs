@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Darkhood.TexasHoldem.Core
 {
-    public class Hand : IComparable<Hand>
+    public class Hand : IComparable<Hand>, IEquatable<Hand>
     {
         public const int MaxCardsInHand = 5;
         protected List<Card> Cards;
@@ -115,7 +115,7 @@ namespace Darkhood.TexasHoldem.Core
                 isFlush = (sameSuitCount == Cards.Count);
 
                 Card[] cardsArray = new Card[Cards.Count];
-                cardsArray.CopyTo(cardsArray, 0);
+                Cards.CopyTo(cardsArray, 0);
                 Array.Sort(cardsArray);
 
                 // Check if the hand is straight
@@ -160,7 +160,7 @@ namespace Darkhood.TexasHoldem.Core
             int cardVal = (int)card.Value;
             if (_handHistogram.ContainsKey(cardVal))
             {
-                _handHistogram.Add(cardVal, _handHistogram[cardVal] + 1);
+                _handHistogram[cardVal] += 1;
             }
             else
             {
@@ -450,6 +450,34 @@ namespace Darkhood.TexasHoldem.Core
                 }
             }
             return allHands;
+        }
+
+        public bool Equals(Hand other)
+        {
+            if (this.Cards.Count != other.Cards.Count)
+            {
+                return false;
+            }
+            return this.Cards.TrueForAll(c => other.Cards.Contains(c));
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (this == obj)
+            {
+                return true;
+            }
+            if (obj == null || obj.GetType() != typeof(Hand))
+            {
+                return false;
+            }
+            Hand other = (Hand)obj;
+            return Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Cards, _handType, _handHistogram);
         }
     }
 }

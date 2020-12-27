@@ -86,8 +86,8 @@ namespace Darkhood.TexasHoldem.Core
                    PlayerId == player.PlayerId &&
                    PlayerName == player.PlayerName &&
                    Chips == player.Chips &&
-                   StartingHand.Equals(player.StartingHand) &&
-                   CurrentHand.Equals(player.CurrentHand) &&
+                   (StartingHand != null && StartingHand.Equals(player.StartingHand)) &&
+                   (CurrentHand != null && CurrentHand.Equals(player.CurrentHand)) &&
                    CallSum == player.CallSum &&
                    CalledSum == player.CalledSum &&
                    Folded == player.Folded &&
