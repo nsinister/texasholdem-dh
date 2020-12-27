@@ -18,6 +18,14 @@ namespace Darkhood.TexasHoldem.Core
             }
         }
 
+        public decimal CurrentBet
+        {
+            get
+            {
+                return this.currentBet;
+            }
+        }
+
         private GameState _gameState;
 
         public GameState GameState
