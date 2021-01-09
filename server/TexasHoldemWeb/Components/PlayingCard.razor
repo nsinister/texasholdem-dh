@@ -1,0 +1,45 @@
+﻿@using TexasHoldemWeb.Models;
+@using Darkhood.TexasHoldem.Core;
+
+@if (Model == null)
+{
+
+}
+else
+{
+    <div class="@_cardClass @_isFlipped">
+        <div class="card-face card-face-front">Card</div>
+        <div class="card-face card-face-back">
+            <p class="@_cardTextClass @_cardSuitColor">@GetCardValueText(Model.Value)</p>
+            <p class="@_cardImgClass @_cardSuitColor">@((MarkupString)@GetCardSuitValue(Model.Suit))</p>
+        </div>
+    </div>
+}
+@code {
+    [Parameter] public CardModel Model { get; set; }
+    [Parameter] public bool IsSmall { get; set; }
+
+    string _isFlipped => Model.IsFlipped ? "is-flipped" : "";
+    string _cardClass => IsSmall ? "card-small" : "card";
+    string _cardImgClass => IsSmall ? "card-img-small" : "card-img";
+    string _cardTextClass => IsSmall ? "card-text-small" : "card-text";
+    string _cardSuitColor => (Model.Suit == CardSuit.Diamonds || Model.Suit == CardSuit.Hearts) ? "red" : "black";
+
+    string GetCardSuitValue(CardSuit suit) => suit switch
+    {
+        CardSuit.Diamonds => "&diams;",
+        CardSuit.Hearts => "&hearts;",
+        CardSuit.Spades => "&spades;",
+        CardSuit.Clubs => "&clubs;",
+        _ => String.Empty
+    };
+
+    string GetCardValueText(CardValue val) => val switch
+    {
+        CardValue.Ace => "A",
+        CardValue.King => "A",
+        CardValue.Queen => "A",
+        CardValue.Jack => "A",
+        _ => Convert.ToString((int)val),
+    };
+}

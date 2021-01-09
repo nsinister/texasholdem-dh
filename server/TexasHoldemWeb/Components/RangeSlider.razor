@@ -1,0 +1,28 @@
+﻿<input type="number" min="@Min" max="@Max"
+       @bind-value="SliderValue" @bind-value:event="oninput" />
+<input type="range"
+       min="@Min"
+       max="@Max"
+       step="1"
+       class="column slider"
+       @bind-value="SliderValue"
+       @bind-value:event="oninput" />
+
+@code {
+    [Parameter] public int Min { get; set; }
+    [Parameter] public int Max { get; set; }
+
+    private int? _sliderValue;
+
+    public int SliderValue
+    {
+        get { return !_sliderValue.HasValue ? Min : _sliderValue.Value; }
+        set
+        {
+            _sliderValue = value;
+            OnChange.InvokeAsync(SliderValue);
+        }
+    }
+
+    [Parameter] public EventCallback<int> OnChange { get; set; }
+}
