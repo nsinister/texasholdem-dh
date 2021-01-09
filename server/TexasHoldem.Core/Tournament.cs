@@ -10,6 +10,8 @@ namespace Darkhood.TexasHoldem.Core
         public List<Player> Players { get; set; }
         private Dictionary<int, int> PlayerMap { get; set; }
 
+        private object _lockObj = new object();
+
         public int CurrentTurnPlayerId
         {
             get
@@ -28,27 +30,34 @@ namespace Darkhood.TexasHoldem.Core
 
         private GameState _gameState;
 
+        public event EventHandler<GameStateEventArgs> GameStateChanged;
+        public event EventHandler<PlayerActionEventArgs> OnPlayerAction;
+
         public GameState GameState
         {
             get { return _gameState; }
             private set
             {
-                this._gameState = value;
-                switch (_gameState)
+                lock (_lockObj)
                 {
-                    case GameState.PreFlop:
-                        NewHand();
-                        break;
-                    case GameState.Flop:
-                        sharedCards.Add(deck.TakeCard());
-                        sharedCards.Add(deck.TakeCard());
-                        sharedCards.Add(deck.TakeCard());
-                        break;
-                    case GameState.Turn:
-                    case GameState.River:
-                        sharedCards.Add(deck.TakeCard());
-                        break;
+                    this._gameState = value;
+                    switch (_gameState)
+                    {
+                        case GameState.PreFlop:
+                            NewHand();
+                            break;
+                        case GameState.Flop:
+                            sharedCards.Add(deck.TakeCard());
+                            sharedCards.Add(deck.TakeCard());
+                            sharedCards.Add(deck.TakeCard());
+                            break;
+                        case GameState.Turn:
+                        case GameState.River:
+                            sharedCards.Add(deck.TakeCard());
+                            break;
+                    }
                 }
+                GameStateChanged?.Invoke(this, new GameStateEventArgs { State = _gameState });
             }
         }
 
@@ -105,7 +114,7 @@ namespace Darkhood.TexasHoldem.Core
         private List<Card> sharedCards;
         private Table table;
 
-        private Player GetPlayer(int playerId)
+        public Player GetPlayer(int playerId)
         {
             if (!PlayerMap.ContainsKey(playerId)) return null;
             int playerIndex = PlayerMap[playerId];
@@ -116,97 +125,99 @@ namespace Darkhood.TexasHoldem.Core
         {
             if (Players.Count < 2)
                 return;
-
-            // Reset deck cursor and shuffle
-            table.ClearPots();
-            //pot = 0;
-            currentBet = table.Stake;
-            sharedCards.Clear();
-            deck.Reset();
-            deck.Shuffle();
-            // Reset player hands and blinds
-            for (int i = 0; i < Players.Count; i++)
+            lock (_lockObj)
             {
-                Player player = Players[i];
-                player.IsSmallBlind = false;
-                player.IsBigBlind = false;
-                player.IsDealer = false;
-                player.CallSum = 0;
-                player.CalledSum = 0;
-                player.Folded = false;
-                player.Checked = false;
-                player.StartingHand.Clear();
-                player.CurrentHand.Clear();
-
-                // Starting hand
-                player.AddCard(deck.TakeCard());
-                player.AddCard(deck.TakeCard());
-            }
-
-            // Arrange new blinds
-            if (lastDealerId == 0)
-            {
-                Player firstPlayer = Players[0];
-                lastDealerId = firstPlayer.PlayerId;
-                firstPlayer.IsDealer = true;
-                if (Players.Count > 2)
+                // Reset deck cursor and shuffle
+                table.ClearPots();
+                //pot = 0;
+                currentBet = table.Stake;
+                sharedCards.Clear();
+                deck.Reset();
+                deck.Shuffle();
+                // Reset player hands and blinds
+                for (int i = 0; i < Players.Count; i++)
                 {
-                    Players[1].IsSmallBlind = true;
-                    Players[2].IsBigBlind = true;
+                    Player player = Players[i];
+                    player.IsSmallBlind = false;
+                    player.IsBigBlind = false;
+                    player.IsDealer = false;
+                    player.CallSum = 0;
+                    player.CalledSum = 0;
+                    player.Folded = false;
+                    player.Checked = false;
+                    player.StartingHand.Clear();
+                    player.CurrentHand.Clear();
 
-                    int underTheGunIndex = 3 >= Players.Count ? 0 : 3;
+                    // Starting hand
+                    player.AddCard(deck.TakeCard());
+                    player.AddCard(deck.TakeCard());
+                }
+
+                // Arrange new blinds
+                if (lastDealerId == 0)
+                {
+                    Player firstPlayer = Players[0];
+                    lastDealerId = firstPlayer.PlayerId;
+                    firstPlayer.IsDealer = true;
+                    if (Players.Count > 2)
+                    {
+                        Players[1].IsSmallBlind = true;
+                        Players[2].IsBigBlind = true;
+
+                        int underTheGunIndex = 3 >= Players.Count ? 0 : 3;
+                        currentTurnPlayerId = Players[underTheGunIndex].PlayerId;
+                    }
+                    else
+                    {
+                        // only two players (heads-up), 
+                        // small blind is also a dealer 
+                        Players[0].IsSmallBlind = true;
+                        Players[0].IsDealer = true;
+                        currentTurnPlayerId = Players[0].PlayerId;
+
+                        Players[1].IsBigBlind = true;
+                    }
+                }
+                else
+                {
+                    int newDealerIndex = PlayerMap[lastDealerId] + 1;
+                    if (newDealerIndex >= Players.Count)
+                    {
+                        newDealerIndex = 0;
+                    }
+                    Players[newDealerIndex].IsDealer = true;
+                    lastDealerId = Players[newDealerIndex].PlayerId;
+                    int sbIndex = newDealerIndex + 1 >= Players.Count ? 0 : newDealerIndex + 1;
+                    int bbIndex = newDealerIndex + 2 >= Players.Count ? 0 : newDealerIndex + 2;
+                    Players[sbIndex].IsSmallBlind = true;
+                    Players[bbIndex].IsBigBlind = true;
+
+                    int underTheGunIndex = bbIndex + 1 >= Players.Count ? 0 : bbIndex + 1;
                     currentTurnPlayerId = Players[underTheGunIndex].PlayerId;
                 }
-                else
-                {
-                    // only two players (heads-up), 
-                    // small blind is also a dealer 
-                    Players[0].IsSmallBlind = true;
-                    Players[0].IsDealer = true;
-                    currentTurnPlayerId = Players[0].PlayerId;
 
-                    Players[1].IsBigBlind = true;
+                // Blinds bet
+                foreach (Player player in Players)
+                {
+                    if (player.IsBigBlind)
+                    {
+                        player.CallSum = 0;
+                        table.Contribute(player, table.Stake);
+                    }
+                    else if (player.IsSmallBlind)
+                    {
+                        decimal betSum = table.Stake / 2;
+                        player.CallSum = betSum;
+                        table.Contribute(player, betSum);
+                    }
+                    else
+                    {
+                        player.CallSum = table.Stake;
+                    }
                 }
+
+                handCount++;
             }
-            else
-            {
-                int newDealerIndex = PlayerMap[lastDealerId] + 1;
-                if (newDealerIndex >= Players.Count)
-                {
-                    newDealerIndex = 0;
-                }
-                Players[newDealerIndex].IsDealer = true;
-                lastDealerId = Players[newDealerIndex].PlayerId;
-                int sbIndex = newDealerIndex + 1 >= Players.Count ? 0 : newDealerIndex + 1;
-                int bbIndex = newDealerIndex + 2 >= Players.Count ? 0 : newDealerIndex + 2;
-                Players[sbIndex].IsSmallBlind = true;
-                Players[bbIndex].IsBigBlind = true;
-
-                int underTheGunIndex = bbIndex + 1 >= Players.Count ? 0 : bbIndex + 1;
-                currentTurnPlayerId = Players[underTheGunIndex].PlayerId;
-            }
-
-            // Blinds bet
-            foreach (Player player in Players)
-            {
-                if (player.IsBigBlind)
-                {
-                    player.CallSum = 0;
-                    table.Contribute(player, table.Stake);
-                }
-                else if (player.IsSmallBlind)
-                {
-                    decimal betSum = table.Stake / 2;
-                    player.CallSum = betSum;
-                    table.Contribute(player, betSum);
-                }
-                else
-                {
-                    player.CallSum = table.Stake;
-                }
-            }
-
-            handCount++;
         }
 
         public Card[] SharedCards
@@ -290,26 +301,22 @@ namespace Darkhood.TexasHoldem.Core
             if (calledPlayerCount == Players.Count || nextTurnPlayer == null)
             {
                 // change the hand state
+                ResetHandRound();
                 switch (GameState)
                 {
                     case GameState.PreFlop:
                         GameState = GameState.Flop;
-                        ResetHandRound();
                         break;
                     case GameState.Flop:
                         GameState = GameState.Turn;
-                        ResetHandRound();
                         break;
                     case GameState.Turn:
                         GameState = GameState.River;
-                        ResetHandRound();
                         break;
                     case GameState.River:
-                        ResetHandRound();
                         Showdown();
                         break;
                 }
-
             }
             if (nextTurnPlayer != null)
                 currentTurnPlayerId = nextTurnPlayer.PlayerId;
@@ -423,8 +430,7 @@ namespace Darkhood.TexasHoldem.Core
                 }
             }
 
-            // change the game state. next hand.
-            GameState = GameState.PreFlop;
+            GameState = GameState.Showdown;
         }
 
         public bool AddPlayer(Player player)
@@ -453,32 +459,35 @@ namespace Darkhood.TexasHoldem.Core
         {
             if (playerId != currentTurnPlayerId)
                 return false;
-
-            Player playerFold = null;
-            int foldedPlayerCount = 0;
-            foreach (Player player in Players)
+            lock (_lockObj)
             {
-                if (player.PlayerId == playerId)
+                Player playerFold = null;
+                int foldedPlayerCount = 0;
+                foreach (Player player in Players)
                 {
-                    playerFold = player;
+                    if (player.PlayerId == playerId)
+                    {
+                        playerFold = player;
+                    }
+                    if (player.Folded)
+                    {
+                        foldedPlayerCount++;
+                    }
                 }
-                if (player.Folded)
+                if (Players.Count - foldedPlayerCount == 1)
                 {
-                    foldedPlayerCount++;
+                    // can't fold if there is only one player left
+                    return false;
                 }
-            }
-            if (Players.Count - foldedPlayerCount == 1)
-            {
-                // can't fold if there is only one player left
+                if (playerFold != null)
+                {
+                    playerFold.Folded = true;
+                    NextPlayerTurn();
+                    OnPlayerAction?.Invoke(this, new PlayerActionEventArgs { Player = playerFold });
+                    return true;
+                }
                 return false;
             }
-            if (playerFold != null)
-            {
-                playerFold.Folded = true;
-                NextPlayerTurn();
-                return true;
-            }
-            return false;
         }
 
         public void NextRound()
@@ -495,39 +504,43 @@ namespace Darkhood.TexasHoldem.Core
         {
             if (playerId != currentTurnPlayerId)
                 return false;
-            // Can't bet if there is already a bet. 
-            // Player should raise instead.
-            if (currentBet > table.Stake)
+            lock (_lockObj)
             {
-                return false;
-            }
-            // The minimum bet sum is current bet sum.
-            if (betSum < currentBet)
-                return false;
-            Player player = GetPlayer(playerId);
-            if (player != null && player.Chips >= betSum)
-            {
-                currentBet = betSum;
-                table.Contribute(player, betSum);
-                player.CalledSum = betSum;
-                player.CallSum = player.CallSum - betSum < 0 ? 0 : player.CallSum - betSum;
-
-                foreach (Player p in Players)
+                // Can't bet if there is already a bet. 
+                // Player should raise instead.
+                if (currentBet > table.Stake)
                 {
-                    if (p == player || p.Folded)
-                        continue;
-                    p.CallSum = currentBet;
+                    return false;
                 }
-                player.Checked = true;
+                // The minimum bet sum is current bet sum.
+                if (betSum < currentBet)
+                    return false;
+                Player player = GetPlayer(playerId);
+                if (player != null && player.Chips >= betSum)
+                {
+                    currentBet = betSum;
+                    table.Contribute(player, betSum);
+                    player.CalledSum = betSum;
+                    player.CallSum = player.CallSum - betSum < 0 ? 0 : player.CallSum - betSum;
 
-                //if (player.chips == 0) {
-                //// Forced to going All-In
-                //}
+                    foreach (Player p in Players)
+                    {
+                        if (p == player || p.Folded)
+                            continue;
+                        p.CallSum = currentBet;
+                    }
+                    player.Checked = true;
 
-                NextPlayerTurn();
-                return true;
+                    //if (player.chips == 0) {
+                    //// Forced to going All-In
+                    //}
+
+                    NextPlayerTurn();
+                    OnPlayerAction?.Invoke(this, new PlayerActionEventArgs { Player = player });
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
 
         public bool Raise(Player player, decimal raiseSum)
@@ -539,28 +552,68 @@ namespace Darkhood.TexasHoldem.Core
         {
             if (playerId != currentTurnPlayerId)
                 return false;
-            // The minimum raise sum is current bet sum.
-            if (raiseSum < currentBet)
+            lock (_lockObj)
+            {
+                // The minimum raise sum is current bet sum.
+                if (raiseSum < currentBet)
+                    return false;
+                Player player = GetPlayer(playerId);
+                if (player != null && player.Chips >= raiseSum)
+                {
+                    foreach (Player p in Players)
+                    {
+                        if (p == player || p.Folded)
+                            continue;
+                        decimal difference = raiseSum - p.CalledSum;
+                        p.CallSum += difference;
+                    }
+                    player.CalledSum = raiseSum;
+                    player.CallSum = player.CallSum - raiseSum < 0 ? 0 : player.CallSum - raiseSum;
+                    currentBet = raiseSum;
+                    table.Contribute(player, raiseSum);
+                    player.Checked = true;
+                    NextPlayerTurn();
+                    OnPlayerAction?.Invoke(this, new PlayerActionEventArgs { Player = player });
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        public bool CanCall(int playerId)
+        {
+            if (GameState == GameState.Showdown ||
+                GameState == GameState.Lobby ||
+                GameState == GameState.GameStarted)
+                return false;
+            if (playerId != currentTurnPlayerId)
                 return false;
             Player player = GetPlayer(playerId);
-            if (player != null && player.Chips >= raiseSum)
-            {
-                foreach (Player p in Players)
-                {
-                    if (p == player || p.Folded)
-                        continue;
-                    decimal difference = raiseSum - p.CalledSum;
-                    p.CallSum += difference;
-                }
-                player.CalledSum = raiseSum;
-                player.CallSum = player.CallSum - raiseSum < 0 ? 0 : player.CallSum - raiseSum;
-                currentBet = raiseSum;
-                table.Contribute(player, raiseSum);
-                player.Checked = true;
-                NextPlayerTurn();
+            if (player == null) 
+                return false;
+            if (player.Folded || player.Checked)
+                return false;
+            if (player.CallSum > 0)
                 return true;
-            }
             return false;
+        }
+
+        public bool CanCheck(int playerId)
+        {
+            if (GameState == GameState.Showdown ||
+                GameState == GameState.Lobby ||
+                GameState == GameState.GameStarted)
+                return false;
+            if (playerId != currentTurnPlayerId)
+                return false;
+            Player player = GetPlayer(playerId);
+            if (player == null)
+                return false;
+            if (player.Folded || player.Checked)
+                return false;
+            if (player.CallSum > 0)
+                return false;
+            return true;
         }
 
         public bool Call(Player player)
@@ -572,27 +625,31 @@ namespace Darkhood.TexasHoldem.Core
         {
             if (playerId != currentTurnPlayerId)
                 return false;
-            Player player = GetPlayer(playerId);
-            if (player != null && player.CallSum > 0)
+            lock (_lockObj)
             {
-                if (player.Chips < player.CallSum)
+                Player player = GetPlayer(playerId);
+                if (player != null && player.CallSum > 0)
                 {
-                    player.CallSum -= player.Chips;
-                    player.CalledSum += player.Chips;
-                    // Forced to going All-In
-                    table.Contribute(player, player.Chips);
+                    if (player.Chips < player.CallSum)
+                    {
+                        player.CallSum -= player.Chips;
+                        player.CalledSum += player.Chips;
+                        // Forced to going All-In
+                        table.Contribute(player, player.Chips);
+                    }
+                    else
+                    {
+                        player.CalledSum += player.CallSum;
+                        player.CallSum = 0;
+                        table.Contribute(player, player.CalledSum);
+                    }
+                    player.Checked = true;
+                    NextPlayerTurn();
+                    OnPlayerAction?.Invoke(this, new PlayerActionEventArgs { Player = player });
+                    return true;
                 }
-                else
-                {
-                    player.CalledSum += player.CallSum;
-                    player.CallSum = 0;
-                    table.Contribute(player, player.CallSum);
-                }
-                player.Checked = true;
-                NextPlayerTurn();
-                return true;
+                return false;
             }
-            return false;
         }
 
         public bool Check(Player player)
@@ -604,19 +661,23 @@ namespace Darkhood.TexasHoldem.Core
         {
             if (playerId != currentTurnPlayerId)
                 return false;
-            Player player = GetPlayer(playerId);
-            if (player != null)
+            lock (_lockObj)
             {
-                // if there wasn't any bet or raise,
-                // the player is eligible to check
-                if (player.CallSum == 0)
+                Player player = GetPlayer(playerId);
+                if (player != null)
                 {
-                    player.Checked = true;
-                    NextPlayerTurn();
-                    return true;
+                    // if there wasn't any bet or raise,
+                    // the player is eligible to check
+                    if (player.CallSum == 0)
+                    {
+                        player.Checked = true;
+                        NextPlayerTurn();
+                        OnPlayerAction?.Invoke(this, new PlayerActionEventArgs { Player = player });
+                        return true;
+                    }
                 }
+                return false;
             }
-            return false;
         }
     }
 

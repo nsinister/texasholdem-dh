@@ -9,6 +9,7 @@ namespace Darkhood.TexasHoldem.Core
     public class Deck
     {
         public const int CardsInDeck = 52;
+        private object _sync = new object();
         public IList<Card> Cards;
         private int _index = 0;
         public bool IsShuffled { get; set; }
@@ -52,7 +53,10 @@ namespace Darkhood.TexasHoldem.Core
             {
                 return null;
             }
-            return Cards[_index--];
+            lock (_sync)
+            {
+                return Cards[_index--];
+            }
         }
 
         public void Shuffle()

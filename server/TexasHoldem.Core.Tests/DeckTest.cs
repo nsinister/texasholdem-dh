@@ -1,4 +1,5 @@
 using Darkhood.TexasHoldem.Core;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Darkhood.TexasHoldem.Core.Tests
@@ -52,6 +53,29 @@ namespace Darkhood.TexasHoldem.Core.Tests
         }
 
         [Fact]
+        public void TestTakenCardsAreUnique()
+        {
+            Deck deck = Deck.CreateDeck(true);
+            List<Card> takenCards = new List<Card>();
+            for (int i = 0; i < Deck.CardsInDeck; i++)
+            {
+                Card takenCard = deck.TakeCard();
+                Assert.DoesNotContain(takenCard, takenCards);
+                takenCards.Add(takenCard);
+            }
+
+            takenCards.Clear();
+            deck.Reset();
+            deck.Shuffle();
+            for (int i = 0; i < Deck.CardsInDeck; i++)
+            {
+                Card takenCard = deck.TakeCard();
+                Assert.DoesNotContain(takenCard, takenCards);
+                takenCards.Add(takenCard);
+            }
+        }
+
+        [Fact]
         public void TestTakeCard()
         {
             Deck deck = Deck.CreateDeck(false);
@@ -68,10 +92,13 @@ namespace Darkhood.TexasHoldem.Core.Tests
             Assert.Equal(expectedCard2, anotherCardFromDeck);
             Assert.NotEqual(cardFromDeck, anotherCardFromDeck);
 
+            List<Card> takenCards = new List<Card>();
             for (int i = 0; i < Deck.CardsInDeck - 2; i++)
             {
                 Card takenCard = deck.TakeCard();
                 Assert.NotNull(takenCard);
+                Assert.DoesNotContain(takenCard, takenCards);
+                takenCards.Add(takenCard);
             }
             // test if it returns null after the last card taken from the deck
             Assert.Null(deck.TakeCard());
@@ -86,5 +113,7 @@ namespace Darkhood.TexasHoldem.Core.Tests
             Assert.True(deck.IsShuffled);
             Assert.NotEqual(unshuffledDeck.Cards, deck.Cards);
         }
+
+
     }
 }
